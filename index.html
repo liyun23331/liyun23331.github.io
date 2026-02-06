@@ -14,36 +14,361 @@
     <div class="background-image"></div>
     <div class="background-overlay"></div>
 
-    <!-- 左侧边栏 -->
+    <!-- 左侧边栏 (类似QQ空间) -->
     <aside class="sidebar">
+        <!-- 头像区域 -->
         <div class="avatar-container">
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                  alt="个人头像" class="avatar" id="avatar-img">
         </div>
 
+        <!-- 个人信息 -->
         <div class="user-info">
             <h1 class="name" id="user-name">林云的个人空间</h1>
-            <p class="bio" id="user-bio">专注于前端开发、用户体验设计和技术写作</p>
+            <p class="bio" id="user-bio">专注于前端开发、用户体验设计和技术写作。记录学习过程，分享实用技巧。</p>
 
+            <!-- 社交链接 -->
             <div class="social-links">
-                <a href="https://github.com/liyun23331" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link" title="微信"><i class="fab fa-weixin"></i></a>
-                <a href="#" class="social-link" title="邮箱"><i class="fas fa-envelope"></i></a>
-                <a href="#" class="social-link" title="RSS"><i class="fas fa-rss"></i></a>
+                <a href="https://github.com/liyun23331" class="social-link" title="GitHub" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="social-link" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link" title="微信">
+                    <i class="fab fa-weixin"></i>
+                </a>
+                <a href="#" class="social-link" title="知乎">
+                    <i class="fab fa-zhihu"></i>
+                </a>
+                <a href="#" class="social-link" title="RSS订阅">
+                    <i class="fas fa-rss"></i>
+                </a>
             </div>
         </div>
 
-        <!-- 其余HTML代码与之前完全相同 -->
-        <!-- 包括菜单、分类目录、文章列表等 -->
-        <!-- 由于篇幅限制，这里省略中间部分，你使用之前提供的完整HTML代码即可 -->
+        <!-- 导航菜单 -->
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="#" class="menu-link active">
+                    <i class="fas fa-home"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-folder"></i>
+                    <span>分类目录</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-file-alt"></i>
+                    <span>所有文章</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-photo-video"></i>
+                    <span>相册</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-user-friends"></i>
+                    <span>好友</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-cog"></i>
+                    <span>设置</span>
+                </a>
+            </li>
+        </ul>
 
+        <!-- 访问统计 -->
+        <div class="visit-stats">
+            <p>📊 今日访问: <span id="today-visits">28</span></p>
+            <p>👥 总访问量: <span id="total-visits">1,247</span></p>
+            <p>🕒 最后登录: 刚刚</p>
+        </div>
     </aside>
 
     <!-- 右侧主内容区域 -->
     <main class="main-content">
-        <!-- 这里也是之前提供的完整HTML内容 -->
+        <!-- 欢迎横幅 -->
+        <div class="welcome-banner">
+            <h2 class="welcome-title">👋 欢迎来到我的个人空间！</h2>
+            <p class="welcome-text">这里是我分享技术、生活和思考的地方。已有 <strong>24</strong> 篇文章，<strong>3</strong> 个分类，最近更新于今天。</p>
+        </div>
+
+        <!-- 分级目录区域 -->
+        <section class="content-card">
+            <h2 class="section-title"><i class="fas fa-folder-tree"></i>知识分类目录</h2>
+            <div class="category-container">
+                <!-- 分类1 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="category-title">前端开发</h3>
+                    </div>
+                    <ul class="subcategory-list">
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fab fa-html5"></i>HTML/CSS基础
+                            </a>
+                        </li>
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fab fa-js"></i>JavaScript进阶
+                            </a>
+                        </li>
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fab fa-react"></i>React框架
+                            </a>
+                        </li>
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fas fa-mobile-alt"></i>响应式设计
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 分类2 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 class="category-title">后端技术</h3>
+                    </div>
+                    <ul class="subcategory-list">
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fab fa-node-js"></i>Node.js
+                            </a>
+                        </li>
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fas fa-database"></i>数据库设计
+                            </a>
+                        </li>
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fas fa-bolt"></i>API开发
+                            </a>
+                        </li>
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fas fa-shield-alt"></i>网络安全
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 分类3 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="category-title">设计相关</h3>
+                    </div>
+                    <ul class="subcategory-list">
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fas fa-palette"></i>UI设计
+                            </a>
+                        </li>
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fas fa-user-check"></i>用户体验
+                            </a>
+                        </li>
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fas fa-mobile-alt"></i>响应式设计
+                            </a>
+                        </li>
+                        <li class="subcategory-item">
+                            <a href="#" class="subcategory-link">
+                                <i class="fas fa-chart-line"></i>数据分析
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最新文章区域 -->
+        <section class="content-card">
+            <h2 class="section-title"><i class="fas fa-pen-fancy"></i>最新文章</h2>
+            <div class="articles-container">
+                <!-- 文章1 -->
+                <article class="article-item">
+                    <h3 class="article-title">
+                        <i class="fas fa-star"></i>
+                        <a href="articles/github-pages-guide.html">GitHub Pages搭建个人博客全攻略</a>
+                    </h3>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 2023年10月28日</span>
+                        <span><i class="far fa-clock"></i> 8分钟阅读</span>
+                        <span><i class="far fa-eye"></i> 245 浏览</span>
+                    </div>
+                    <p>详细介绍了如何使用GitHub Pages从零开始搭建个人静态博客，包含自定义域名、主题配置和自动化部署。</p>
+                    <div class="article-tags">
+                        <span class="article-tag">GitHub</span>
+                        <span class="article-tag">博客</span>
+                        <span class="article-tag">教程</span>
+                    </div>
+                </article>
+
+                <!-- 文章2 -->
+                <article class="article-item">
+                    <h3 class="article-title">
+                        <i class="fas fa-star"></i>
+                        <a href="articles/css-grid-flexbox.html">CSS Grid与Flexbox的实战对比</a>
+                    </h3>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 2023年10月25日</span>
+                        <span><i class="far fa-clock"></i> 12分钟阅读</span>
+                        <span><i class="far fa-eye"></i> 187 浏览</span>
+                    </div>
+                    <p>通过实际布局案例，分析CSS Grid和Flexbox各自的最佳使用场景，帮助开发者选择最合适的布局方案。</p>
+                    <div class="article-tags">
+                        <span class="article-tag">CSS</span>
+                        <span class="article-tag">布局</span>
+                        <span class="article-tag">前端</span>
+                    </div>
+                </article>
+
+                <!-- 文章3 -->
+                <article class="article-item">
+                    <h3 class="article-title">
+                        <i class="fas fa-star"></i>
+                        <a href="articles/vue3-composition-api.html">Vue 3.0 Composition API入门指南</a>
+                    </h3>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 2023年10月22日</span>
+                        <span><i class="far fa-clock"></i> 15分钟阅读</span>
+                        <span><i class="far fa-eye"></i> 312 浏览</span>
+                    </div>
+                    <p>全面介绍Vue 3.0的Composition API，通过实例讲解如何更好地组织和复用组件逻辑。</p>
+                    <div class="article-tags">
+                        <span class="article-tag">Vue</span>
+                        <span class="article-tag">前端</span>
+                        <span class="article-tag">框架</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2023 林云的个人空间. 由 GitHub Pages 提供支持 | 已运行 <span id="site-runtime">0</span> 天</p>
+            <p style="margin-top: 8px; font-size: 0.85rem;">
+                <i class="fas fa-heart" style="color: #ef4444;"></i> 最后更新于 <span id="last-update">2023年10月28日</span>
+            </p>
+        </footer>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+        // 网站运行时间计算
+        function updateRuntime() {
+        const startDate = new Date('2023-10-28');
+        const currentDate = new Date();
+        const diffTime = Math.abs(currentDate - startDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        document.getElementById('site-runtime').textContent = diffDays;
+
+        // 更新最后更新日期
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('last-update').textContent = currentDate.toLocaleDateString('zh-CN', options);
+        }
+
+        // 访问量模拟更新
+        function updateVisits() {
+        const todayVisits = document.getElementById('today-visits');
+        const totalVisits = document.getElementById('total-visits');
+
+        // 模拟今日访问量（随机增加）
+        let today = parseInt(todayVisits.textContent);
+        today += Math.floor(Math.random() * 3);
+        todayVisits.textContent = today;
+
+        // 更新总访问量
+        let total = parseInt(totalVisits.textContent.replace(',', ''));
+        total += Math.floor(Math.random() * 5);
+        totalVisits.textContent = total.toLocaleString();
+        }
+
+        // 菜单点击效果
+        document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+        if(this.getAttribute('href') === '#') {
+        e.preventDefault();
+
+        // 移除所有active类
+        document.querySelectorAll('.menu-link').forEach(item => {
+        item.classList.remove('active');
+        });
+
+        // 给当前点击的添加active
+        this.classList.add('active');
+
+        const pageName = this.querySelector('span').textContent;
+        alert(`导航到: ${pageName}\n(在实际使用时，这里会跳转到对应页面)`);
+        }
+        });
+        });
+
+        // 背景切换功能
+        function changeBackground(imageUrl) {
+        document.documentElement.style.setProperty('--bg-image', `url('${imageUrl}')`);
+        console.log('背景已更换:', imageUrl);
+        }
+
+        // 双击头像更换背景
+        document.getElementById('avatar-img').addEventListener('dblclick', function() {
+        const backgrounds = [
+        'https://images.unsplash.com/photo-1550684376-efcbd6e3f031?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+        'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+        'https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
+        ];
+        const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        changeBackground(randomBg);
+        });
+
+        // 文章点击效果
+        document.querySelectorAll('.article-title a').forEach(link => {
+        link.addEventListener('click', function(e) {
+        if(this.getAttribute('href').includes('#')) {
+        e.preventDefault();
+        alert(`文章链接: ${this.textContent}\n(在实际使用时，这里会跳转到文章详情页)`);
+        }
+        });
+        });
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+        updateRuntime();
+
+        // 每30秒更新一次访问量
+        setInterval(updateVisits, 30000);
+
+        // 初始访客更新
+        updateVisits();
+
+        // 控制台欢迎信息
+        console.log(`%c 🚀 欢迎访问个人空间！`, 'color: #3b82f6; font-size: 14px; font-weight: bold;');
+        console.log(`%c ✨ 提示：双击头像可以更换背景`, 'color: #8b5cf6; font-size: 12px;');
+        });
+    </script>
 </body>
 </html>
