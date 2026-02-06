@@ -5,8 +5,8 @@
     --bg-overlay: rgba(15, 23, 42, 0.85); /* 背景遮罩颜色 */
 
     /* 2. 头像配置 */
-    --avatar-size: 100px;          /* 头像直径 */
-    --avatar-border: 3px solid #3b82f6; /* 头像边框 */
+    --avatar-size: 140px;          /* 头像直径 */
+    --avatar-border: 4px solid #3b82f6; /* 头像边框 */
 
     /* 3. 颜色配置 */
     --primary-color: #3b82f6;      /* 主色调（链接、按钮） */
@@ -103,15 +103,29 @@ body {
     width: var(--avatar-size);
     height: var(--avatar-size);
     border-radius: 50%;
-    object-fit: cover;
     border: var(--avatar-border);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
+    object-fit: cover; /* 关键：保持比例裁剪 */
+    object-position: center; /* 关键：居中裁剪 */
+    /* 高清优化 */
+    image-rendering: -webkit-optimize-contrast; /* Chrome/Safari */
+    image-rendering: crisp-edges; /* Firefox */
+    /* 视觉效果 */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.1); /* 内阴影 */
+    /* 动画效果 */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* 防止拖拽 */
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-.avatar:hover {
-    transform: scale(1.05);
-}
+    .avatar:hover {
+        transform: scale(1.08) rotate(5deg);
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4), 0 0 0 3px rgba(59, 130, 246, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    .avatar:active {
+        transform: scale(0.98);
+        transition: transform 0.1s;
+    }
 
 /* 个人信息 */
 .user-info {
