@@ -1,0 +1,16 @@
+# Visual Studio 临时文件
+.vs/
+*.vsidx
+*.vsp
+*.vspx
+*.vspscc
+
+# Visual Studio Code
+.vscode/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 其他
+*.log
