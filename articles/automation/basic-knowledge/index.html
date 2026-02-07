@@ -1,0 +1,606 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动化基础知识目录 | 我的知识库</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <style>
+        /* 简洁的目录样式 */
+        .directory-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
+        /* 文章列表 */
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .article-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+            .article-item:hover {
+                background: rgba(30, 41, 59, 0.9);
+                border-color: #3b82f6;
+                transform: translateX(10px);
+            }
+
+        .article-icon {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .article-info {
+            flex: 1;
+        }
+
+            .article-info h3 {
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+                color: white;
+            }
+
+            .article-info p {
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 0.95rem;
+                margin: 0;
+            }
+
+        .article-meta {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        /* 快速操作区域 */
+        .quick-actions {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 40px;
+            border-left: 4px solid #10b981;
+        }
+
+        .actions-title {
+            color: #10b981;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .action-btn:hover {
+                background: rgba(16, 185, 129, 0.3);
+                transform: translateY(-2px);
+            }
+
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(59, 130, 246, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .nav-btn:hover {
+                background: rgba(59, 130, 246, 0.4);
+            }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.5);
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+            .empty-state i {
+                font-size: 3rem;
+                margin-bottom: 20px;
+                color: #6b7280;
+            }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .article-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .article-meta {
+                margin-top: 10px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 复用首页背景 -->
+    <div class="background-layer"></div>
+    <div class="background-image"></div>
+    <div class="background-overlay"></div>
+
+    <!-- 简化侧边栏 -->
+    <aside class="sidebar" style="padding: 20px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div style="font-size: 2rem; color: #3b82f6; margin-bottom: 10px;">
+                <i class="fas fa-folder-open"></i>
+            </div>
+            <h3 style="color: white; margin: 0;">自动化基础</h3>
+            <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 5px 0 0;">知识目录</p>
+        </div>
+
+        <ul class="sidebar-menu" style="margin-top: 20px;">
+            <li class="menu-item">
+                <a href="../../../index.html" class="menu-link active">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>返回主目录</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#add-article" class="menu-link">
+                    <i class="fas fa-plus"></i>
+                    <span>添加文章</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- 目录内容 -->
+    <main class="main-content">
+        <div class="directory-page">
+            <!-- 页面头部 -->
+            <header class="page-header">
+                <h1 class="page-title">📁 自动化基础知识目录</h1>
+                <p class="page-subtitle">这里是自动化基础知识的集合，包含核心概念、实用技术和学习资源</p>
+            </header>
+
+            <!-- 文章列表 -->
+            <div class="article-list" id="article-list">
+                <!-- 文章项会通过JavaScript动态生成 -->
+                <!-- 初始示例文章 -->
+                <a href="plc-basics.html" class="article-item">
+                    <div class="article-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div class="article-info">
+                        <h3>PLC编程入门指南</h3>
+                        <p>从零开始学习PLC梯形图编程，掌握工业自动化控制的核心技能</p>
+                    </div>
+                    <div class="article-meta">
+                        <div>📖 15分钟阅读</div>
+                        <div>🔄 2024.01.20</div>
+                    </div>
+                </a>
+
+                <a href="sensor-principles.html" class="article-item">
+                    <div class="article-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="article-info">
+                        <h3>传感器工作原理详解</h3>
+                        <p>深入解析各类工业传感器的原理、选型和应用场景</p>
+                    </div>
+                    <div class="article-meta">
+                        <div>📖 12分钟阅读</div>
+                        <div>🔄 2024.01.18</div>
+                    </div>
+                </a>
+
+                <a href="motor-control.html" class="article-item">
+                    <div class="article-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="article-info">
+                        <h3>电机控制基础</h3>
+                        <p>学习直流电机、步进电机、伺服电机的控制原理和方法</p>
+                    </div>
+                    <div class="article-meta">
+                        <div>📖 18分钟阅读</div>
+                        <div>🔄 2024.01.15</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 空状态提示 -->
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <i class="fas fa-folder-open"></i>
+                <h3>目录空空如也</h3>
+                <p>点击下方按钮添加第一篇文章</p>
+            </div>
+
+            <!-- 快速操作区域 -->
+            <section class="quick-actions" id="add-article">
+                <h3 class="actions-title">
+                    <i class="fas fa-tools"></i> 目录管理
+                </h3>
+
+                <div class="action-buttons">
+                    <a href="#" class="action-btn" id="add-article-btn">
+                        <i class="fas fa-plus"></i> 添加新文章
+                    </a>
+
+                    <a href="#" class="action-btn" id="edit-article-btn">
+                        <i class="fas fa-edit"></i> 编辑文章
+                    </a>
+
+                    <a href="#" class="action-btn" id="export-btn">
+                        <i class="fas fa-download"></i> 导出目录
+                    </a>
+
+                    <a href="../../../index.html" class="action-btn">
+                        <i class="fas fa-home"></i> 返回首页
+                    </a>
+                </div>
+
+                <!-- 添加文章表单（默认隐藏） -->
+                <div id="add-form" style="display: none; margin-top: 20px;">
+                    <div style="display: grid; gap: 15px;">
+                        <input type="text"
+                               id="new-article-title"
+                               placeholder="文章标题（例如：PID控制原理）"
+                               style="padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 6px;">
+
+                        <textarea id="new-article-desc"
+                                  placeholder="文章简短描述"
+                                  rows="3"
+                                  style="padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 6px; resize: vertical;"></textarea>
+
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="createArticle()"
+                                    style="padding: 10px 20px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                                创建文章
+                            </button>
+                            <button onclick="document.getElementById('add-form').style.display='none'"
+                                    style="padding: 10px 20px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                                取消
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 导航按钮 -->
+            <div class="nav-buttons">
+                <a href="../../../index.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>返回知识分类</span>
+                </a>
+
+                <div>
+                    <span style="color: rgba(255,255,255,0.5); margin-right: 15px;">
+                        共 <span id="article-count">3</span> 篇文章
+                    </span>
+                    <a href="#" class="nav-btn" onclick="refreshList()">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>刷新列表</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 文章数据（使用localStorage存储）
+        let articles = JSON.parse(localStorage.getItem('automation-basics-articles')) || [
+        {
+        id: 1,
+        title: "PLC编程入门指南",
+        description: "从零开始学习PLC梯形图编程，掌握工业自动化控制的核心技能",
+        icon: "fa-microchip",
+        filename: "plc-basics.html",
+        readTime: "15分钟",
+        lastUpdate: "2024.01.20",
+        created: "2024.01.20"
+        },
+        {
+        id: 2,
+        title: "传感器工作原理详解",
+        description: "深入解析各类工业传感器的原理、选型和应用场景",
+        icon: "fa-bolt",
+        filename: "sensor-principles.html",
+        readTime: "12分钟",
+        lastUpdate: "2024.01.18",
+        created: "2024.01.18"
+        },
+        {
+        id: 3,
+        title: "电机控制基础",
+        description: "学习直流电机、步进电机、伺服电机的控制原理和方法",
+        icon: "fa-cogs",
+        filename: "motor-control.html",
+        readTime: "18分钟",
+        lastUpdate: "2024.01.15",
+        created: "2024.01.15"
+        }
+        ];
+
+        // 渲染文章列表
+        function renderArticleList() {
+        const container = document.getElementById('article-list');
+        const emptyState = document.getElementById('empty-state');
+        const articleCount = document.getElementById('article-count');
+
+        articleCount.textContent = articles.length;
+
+        if (articles.length === 0) {
+        container.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+        }
+
+        container.style.display = 'flex';
+        emptyState.style.display = 'none';
+
+        container.innerHTML = articles.map(article => `
+        <a href="${article.filename}" class="article-item" data-id="${article.id}">
+        <div class="article-icon">
+        <i class="fas ${article.icon}"></i>
+        </div>
+        <div class="article-info">
+        <h3>${article.title}</h3>
+        <p>${article.description}</p>
+        </div>
+        <div class="article-meta">
+        <div>📖 ${article.readTime}</div>
+        <div>🔄 ${article.lastUpdate}</div>
+        </div>
+        </a>
+        `).join('');
+
+        // 保存到本地存储
+        localStorage.setItem('automation-basics-articles', JSON.stringify(articles));
+        }
+
+        // 显示添加文章表单
+        document.getElementById('add-article-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('add-form').style.display = 'block';
+        });
+
+        // 创建新文章
+        function createArticle() {
+        const title = document.getElementById('new-article-title').value.trim();
+        const desc = document.getElementById('new-article-desc').value.trim();
+
+        if (!title || !desc) {
+        alert('请输入文章标题和描述');
+        return;
+        }
+
+        // 生成文件名（使用时间戳避免冲突）
+        const timestamp = new Date().getTime();
+        const filename = `article-${timestamp}.html`;
+        const dateStr = new Date().toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+        }).replace(/\//g, '.');
+
+        // 添加新文章
+        const newArticle = {
+        id: articles.length + 1,
+        title: title,
+        description: desc,
+        icon: "fa-file-alt", // 默认图标
+        filename: filename,
+        readTime: "10分钟",
+        lastUpdate: dateStr,
+        created: dateStr
+        };
+
+        articles.push(newArticle);
+        renderArticleList();
+
+        // 创建HTML文件
+        createArticleFile(filename, title, desc);
+
+        // 重置表单
+        document.getElementById('new-article-title').value = '';
+        document.getElementById('new-article-desc').value = '';
+        document.getElementById('add-form').style.display = 'none';
+
+        alert(`文章"${title}"已创建！\n文件：${filename}`);
+        }
+
+        // 创建文章HTML文件
+        function createArticleFile(filename, title, description) {
+        const template = `<!DOCTYPE html>
+        <html lang="zh-CN">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${title} | 自动化基础</title>
+        <link rel="stylesheet" href="../../../style.css">
+        <style>
+        .article-content {
+        max-width: 800px;
+        margin: 60px auto;
+        padding: 40px;
+        background: rgba(30, 41, 59, 0.8);
+        border-radius: 12px;
+        color: #f1f5f9;
+        }
+        h1 {
+        color: #3b82f6;
+        border-bottom: 2px solid;
+        padding-bottom: 10px;
+        }
+        .back-btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 20px;
+        background: #3b82f6;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        }
+        </style>
+        </head>
+        <body>
+        <div class="article-content">
+        <h1>${title}</h1>
+        <p><strong>描述：</strong>${description}</p>
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 30px 0;">
+        <h2>文章内容</h2>
+        <p>在这里编写你的文章内容...</p>
+
+        <h3>章节标题</h3>
+        <p>详细内容...</p>
+
+        <a href="index.html" class="back-btn">← 返回目录</a>
+        </div>
+        </body>
+        </html>`;
+
+        // 在实际项目中，这里需要将文件保存到服务器
+        // 对于静态网站，我们可以提示用户手动创建
+        console.log(`需要创建文件: ${filename}`);
+
+        // 复制模板到剪贴板
+        navigator.clipboard.writeText(template)
+        .then(() => {
+        console.log('模板已复制到剪贴板');
+        })
+        .catch(err => {
+        console.error('复制失败:', err);
+        });
+        }
+
+        // 导出目录
+        document.getElementById('export-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const data = JSON.stringify(articles, null, 2);
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = '自动化基础知识目录.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        });
+
+        // 刷新列表
+        function refreshList() {
+        // 从localStorage重新加载
+        articles = JSON.parse(localStorage.getItem('automation-basics-articles')) || articles;
+        renderArticleList();
+        alert('列表已刷新！');
+        }
+
+        // 编辑文章功能
+        document.getElementById('edit-article-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (articles.length === 0) {
+        alert('当前没有文章可编辑');
+        return;
+        }
+
+        let message = "当前文章列表：\n\n";
+        articles.forEach((article, index) => {
+        message += `${index + 1}. ${article.title}\n`;
+        });
+        message += "\n请直接编辑对应HTML文件进行修改。";
+        alert(message);
+        });
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+        renderArticleList();
+
+        // 如果没有示例文件，创建它们
+        if (!localStorage.getItem('sample-articles-created')) {
+        setTimeout(() => {
+        console.log('目录系统已就绪！');
+        console.log('文章数据已保存到localStorage');
+        localStorage.setItem('sample-articles-created', 'true');
+        }, 1000);
+        }
+        });
+    </script>
+</body>
+</html>
