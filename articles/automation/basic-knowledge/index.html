@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自动化基础知识库 | 我的博客</title>
+    <title>自动化基础知识库 | 我的知识空间</title>
     <link rel="stylesheet" href="../../../style.css">
     <style>
-        /* 简洁的目录样式 */
-        :root {
-            --category-color: #3b82f6;
-        }
-
+        /* 简洁目录样式 */
         .directory-container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -21,7 +17,7 @@
             text-align: center;
             margin-bottom: 50px;
             padding-bottom: 30px;
-            border-bottom: 3px solid var(--category-color);
+            border-bottom: 3px solid #3b82f6;
         }
 
         .directory-title {
@@ -35,119 +31,84 @@
             font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
-        /* 文章网格 */
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+        /* 文章列表 */
+        .articles-list {
             margin-bottom: 60px;
         }
 
-        .article-card {
+        .article-item {
+            display: flex;
+            align-items: center;
             background: rgba(30, 41, 59, 0.7);
             border-radius: 12px;
             padding: 25px;
+            margin-bottom: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
-            display: block;
+            transition: all 0.3s ease;
         }
 
-            .article-card:hover {
-                transform: translateY(-5px);
-                border-color: var(--category-color);
-                box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+            .article-item:hover {
+                transform: translateX(10px);
+                border-color: #3b82f6;
                 background: rgba(30, 41, 59, 0.9);
             }
 
-        .article-order {
-            display: inline-block;
-            background: var(--category-color);
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 32px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .article-card h3 {
+        .article-number {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.3rem;
+            font-weight: bold;
             color: white;
-            margin-bottom: 10px;
-            line-height: 1.4;
+            margin-right: 25px;
         }
 
-        .article-card p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
+        .article-content {
+            flex: 1;
         }
+
+            .article-content h3 {
+                font-size: 1.4rem;
+                color: white;
+                margin-bottom: 8px;
+            }
+
+            .article-content p {
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 10px;
+            }
 
         .article-meta {
             display: flex;
-            justify-content: space-between;
+            gap: 20px;
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.85rem;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
         }
 
-        /* 更新说明区域 */
-        .update-guide {
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 40px;
-            border-left: 4px solid #10b981;
+        /* 页面信息 */
+        .page-info {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 30px 0;
+            font-size: 0.95rem;
         }
-
-        .update-title {
-            color: #10b981;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .update-steps {
-            list-style: none;
-            padding-left: 0;
-        }
-
-            .update-steps li {
-                margin-bottom: 10px;
-                padding-left: 30px;
-                position: relative;
-            }
-
-                .update-steps li:before {
-                    content: counter(step);
-                    counter-increment: step;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    background: #10b981;
-                    color: white;
-                    width: 22px;
-                    height: 22px;
-                    border-radius: 50%;
-                    text-align: center;
-                    line-height: 22px;
-                    font-size: 0.8rem;
-                }
 
         /* 导航按钮 */
-        .nav-buttons {
+        .page-nav {
             display: flex;
             justify-content: space-between;
-            margin-top: 50px;
             padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -168,20 +129,24 @@
                 background: rgba(59, 130, 246, 0.4);
             }
 
-        /* 文章统计 */
-        .stats {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-            margin: 30px 0;
-            font-size: 0.95rem;
-        }
-
+        /* 响应式 */
         @media (max-width: 768px) {
-            .articles-grid {
-                grid-template-columns: 1fr;
+            .article-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
             }
 
-            .nav-buttons {
+            .article-number {
+                margin-right: 0;
+            }
+
+            .article-meta {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .page-nav {
                 flex-direction: column;
                 gap: 15px;
             }
@@ -189,7 +154,7 @@
     </style>
 </head>
 <body>
-    <!-- 复用背景 -->
+    <!-- 背景层 -->
     <div class="background-layer"></div>
     <div class="background-image"></div>
     <div class="background-overlay"></div>
@@ -202,13 +167,13 @@
         </div>
         <div class="user-info">
             <h1 class="name">自动化基础</h1>
-            <p class="bio">核心知识目录</p>
+            <p class="bio">知识目录</p>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-item">
                 <a href="../../../index.html" class="menu-link active">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>返回主目录</span>
+                    <i class="fas fa-home"></i>
+                    <span>返回首页</span>
                 </a>
             </li>
         </ul>
@@ -217,7 +182,7 @@
     <!-- 主内容 -->
     <main class="main-content">
         <div class="directory-container">
-            <!-- 头部 -->
+            <!-- 标题区域 -->
             <header class="directory-header">
                 <h1 class="directory-title">📚 自动化基础知识库</h1>
                 <p class="directory-subtitle">
@@ -225,140 +190,92 @@
                 </p>
             </header>
 
-            <!-- 文章统计 -->
-            <div class="stats" id="article-stats">
-                正在加载文章信息...
+            <!-- 页面信息 -->
+            <div class="page-info">
+                共 <strong>5</strong> 篇文章 • 最后更新：2024年1月22日
             </div>
 
-            <!-- 文章网格 -->
-            <div class="articles-grid" id="articles-container">
-                <!-- 文章会通过JavaScript动态加载 -->
-            </div>
-
-            <!-- 更新指南 -->
-            <section class="update-guide">
-                <h3 class="update-title">
-                    <i class="fas fa-sync-alt"></i> 文章更新流程
-                </h3>
-                <ol class="update-steps" style="counter-reset: step;">
-                    <li>运行更新脚本 <code>update-articles.bat</code></li>
-                    <li>按提示输入文章信息</li>
-                    <li>脚本自动创建文章文件</li>
-                    <li>手动编辑生成的HTML文件添加内容</li>
-                    <li>推送更新到GitHub</li>
-                </ol>
-                <div style="margin-top: 15px;">
-                    <a href="#update-script" class="nav-btn" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">
-                        <i class="fas fa-code"></i> 查看更新脚本
-                    </a>
-                </div>
-            </section>
-
-            <!-- 导航 -->
-            <div class="nav-buttons">
-                <a href="../../../index.html" class="nav-btn">
-                    <i class="fas fa-home"></i>
-                    <span>返回知识分类</span>
+            <!-- 文章列表 -->
+            <div class="articles-list">
+                <!-- 文章1 -->
+                <a href="1-plc-basics.html" class="article-item">
+                    <div class="article-number">01</div>
+                    <div class="article-content">
+                        <h3>PLC编程基础入门</h3>
+                        <p>学习PLC的基本概念、梯形图编程方法和实际应用案例，掌握工业自动化控制的核心技能</p>
+                        <div class="article-meta">
+                            <span>📖 15分钟阅读</span>
+                            <span>📊 初级</span>
+                            <span>🔄 2024.01.22</span>
+                        </div>
+                    </div>
                 </a>
 
-                <a href="https://github.com/liyun23331/liyun23331.github.io/tree/main/articles/automation/basic-knowledge"
-                   class="nav-btn" target="_blank">
-                    <i class="fab fa-github"></i>
-                    <span>查看源码</span>
+                <!-- 文章2 -->
+                <a href="2-sensor-guide.html" class="article-item">
+                    <div class="article-number">02</div>
+                    <div class="article-content">
+                        <h3>工业传感器原理与应用</h3>
+                        <p>全面解析温度、压力、位移等工业传感器的工作原理、选型要点和实际应用</p>
+                        <div class="article-meta">
+                            <span>📖 18分钟阅读</span>
+                            <span>📊 初级</span>
+                            <span>🔄 2024.01.22</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 文章3 -->
+                <a href="3-motor-control.html" class="article-item">
+                    <div class="article-number">03</div>
+                    <div class="article-content">
+                        <h3>电机控制技术详解</h3>
+                        <p>深入讲解直流电机、步进电机、伺服电机的工作原理、驱动电路设计和控制方法</p>
+                        <div class="article-meta">
+                            <span>📖 25分钟阅读</span>
+                            <span>📊 中级</span>
+                            <span>🔄 2024.01.22</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 文章4 -->
+                <a href="4-communication-protocols.html" class="article-item">
+                    <div class="article-number">04</div>
+                    <div class="article-content">
+                        <h3>工业通信协议入门</h3>
+                        <p>学习Modbus、Profibus、以太网等常用工业通信协议的基本原理和实际应用</p>
+                        <div class="article-meta">
+                            <span>📖 20分钟阅读</span>
+                            <span>📊 中级</span>
+                            <span>🔄 2024.01.22</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 文章5 -->
+                <a href="5-pid-control.html" class="article-item">
+                    <div class="article-number">05</div>
+                    <div class="article-content">
+                        <h3>PID控制算法实践</h3>
+                        <p>掌握PID控制的基本原理、参数整定方法和在自动化系统中的实际应用</p>
+                        <div class="article-meta">
+                            <span>📖 30分钟阅读</span>
+                            <span>📊 高级</span>
+                            <span>🔄 2024.01.22</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 导航 -->
+            <div class="page-nav">
+                <a href="../../../index.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>返回知识分类</span>
                 </a>
             </div>
         </div>
     </main>
-
-    <script>
-        // 文章数据 - 硬编码，不提供添加功能
-        const articles = [
-        {
-        id: 1,
-        order: "01",
-        title: "PLC编程基础入门",
-        description: "从零开始学习PLC梯形图编程，掌握工业自动化控制的核心逻辑设计方法",
-        filename: "1-plc-basics.html",
-        readTime: "15分钟",
-        lastUpdate: "2024.01.22",
-        icon: "fa-microchip",
-        difficulty: "初级"
-        },
-        {
-        id: 2,
-        order: "02",
-        title: "工业传感器原理与应用",
-        description: "全面解析温度、压力、位移等工业传感器的原理、选型和应用实例",
-        filename: "2-sensor-guide.html",
-        readTime: "12分钟",
-        lastUpdate: "2024.01.22",
-        icon: "fa-bolt",
-        difficulty: "初级"
-        },
-        {
-        id: 3,
-        order: "03",
-        title: "电机控制技术详解",
-        description: "深入讲解直流电机、步进电机、伺服电机的控制原理和驱动电路设计",
-        filename: "3-motor-control.html",
-        readTime: "18分钟",
-        lastUpdate: "2024.01.22",
-        icon: "fa-cogs",
-        difficulty: "中级"
-        },
-        {
-        id: 4,
-        order: "04",
-        title: "自动化系统通信协议",
-        description: "Modbus、Profibus、以太网等工业通信协议的原理和实现",
-        filename: "4-communication-protocols.html",
-        readTime: "20分钟",
-        lastUpdate: "2024.01.22",
-        icon: "fa-network-wired",
-        difficulty: "中级"
-        },
-        {
-        id: 5,
-        order: "05",
-        title: "PID控制算法实践",
-        description: "PID控制原理、参数整定方法和在自动化系统中的实际应用案例",
-        filename: "5-pid-control.html",
-        readTime: "25分钟",
-        lastUpdate: "2024.01.22",
-        icon: "fa-brain",
-        difficulty: "高级"
-        }
-        ];
-
-        // 渲染文章列表
-        function renderArticles() {
-        const container = document.getElementById('articles-container');
-        const stats = document.getElementById('article-stats');
-
-        // 更新统计信息
-        stats.innerHTML = `
-        <span>📚 共 ${articles.length} 篇文章</span> |
-        <span>⏱️ 总阅读时间约 ${articles.reduce((sum, a) => sum + parseInt(a.readTime), 0)}分钟</span> |
-        <span>📅 最近更新: ${articles[0].lastUpdate}</span>
-        `;
-
-        // 渲染文章卡片
-        container.innerHTML = articles.map(article => `
-        <a href="${article.filename}" class="article-card">
-        <div class="article-order">${article.order}</div>
-        <h3>${article.title}</h3>
-        <p>${article.description}</p>
-        <div class="article-meta">
-        <span>📖 ${article.readTime}</span>
-        <span>${article.difficulty}</span>
-        <span>🔄 ${article.lastUpdate}</span>
-        </div>
-        </a>
-        `).join('');
-        }
-
-        // 页面加载完成时渲染
-        document.addEventListener('DOMContentLoaded', renderArticles);
-    </script>
 </body>
 </html>
