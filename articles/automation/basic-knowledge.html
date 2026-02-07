@@ -1,24 +1,507 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>自动化基础知识</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动化基础知识目录 | 我的知识库</title>
+    <link rel="stylesheet" href="../../../style.css">
     <style>
-        body {
-            font-family: Arial;
-            padding: 40px;
-            max-width: 800px;
-            margin: auto;
+        /* 二级目录特有样式 */
+        .subdirectory-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        h1 {
-            color: #3b82f6;
+        .directory-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .directory-title {
+            font-size: 2.2rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .directory-description {
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 文章网格布局 */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .article-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+            .article-card:hover {
+                transform: translateY(-5px);
+                background: rgba(30, 41, 59, 0.9);
+                border-color: #3b82f6;
+                box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+            }
+
+        .article-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .article-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .article-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+
+        /* 管理区域 */
+        .management-section {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 50px;
+            border-left: 4px solid #10b981;
+        }
+
+        .management-title {
+            color: #10b981;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .add-article-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .form-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+        }
+
+        .add-btn {
+            padding: 12px 25px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .add-btn:hover {
+                background: #0da271;
+                transform: translateY(-2px);
+            }
+
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(59, 130, 246, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .nav-btn:hover {
+                background: rgba(59, 130, 246, 0.4);
+            }
+
+        /* 空状态提示 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+            .empty-state i {
+                font-size: 3rem;
+                margin-bottom: 20px;
+                color: #6b7280;
+            }
+
+        @media (max-width: 768px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .add-article-form {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>自动化基础知识入门</h1>
-    <p>这是正常的文章内容，测试中文显示。</p>
-    <a href="../../index.html">返回首页</a>
+    <!-- 背景层 -->
+    <div class="background-layer"></div>
+    <div class="background-image"></div>
+    <div class="background-overlay"></div>
+
+    <!-- 左侧边栏（简化版） -->
+    <aside class="sidebar">
+        <div class="avatar-container">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                 alt="个人头像" class="avatar">
+        </div>
+        <div class="user-info">
+            <h1 class="name">自动化知识库</h1>
+            <p class="bio">基础知识分类目录</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="../../../index.html" class="menu-link">
+                    <i class="fas fa-home"></i>
+                    <span>返回主目录</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <div class="subdirectory-container">
+            <!-- 目录头部 -->
+            <header class="directory-header">
+                <h1 class="directory-title">📚 自动化基础知识库</h1>
+                <p class="directory-description">
+                    这里是自动化基础知识的集合，包含PLC编程、传感器原理、电机控制等核心内容。
+                    你可以自由添加、删除或修改这里的文章。
+                </p>
+            </header>
+
+            <!-- 文章网格 -->
+            <div class="articles-grid" id="articles-container">
+                <!-- 文章卡片会通过JavaScript动态生成 -->
+                <!-- 初始示例文章 -->
+                <a href="plc-basics.html" class="article-card">
+                    <div class="article-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>PLC编程入门指南</h3>
+                    <p>从零开始学习PLC梯形图编程，掌握工业自动化控制的核心技能。</p>
+                    <div class="article-meta">
+                        <span>📖 阅读时间: 15分钟</span>
+                        <span>🔄 最后更新: 2024.01.20</span>
+                    </div>
+                </a>
+
+                <a href="sensor-principles.html" class="article-card">
+                    <div class="article-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>传感器工作原理详解</h3>
+                    <p>深入解析各类工业传感器的原理、选型和应用场景。</p>
+                    <div class="article-meta">
+                        <span>📖 阅读时间: 12分钟</span>
+                        <span>🔄 最后更新: 2024.01.18</span>
+                    </div>
+                </a>
+
+                <a href="motor-control.html" class="article-card">
+                    <div class="article-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>电机控制基础</h3>
+                    <p>学习直流电机、步进电机、伺服电机的控制原理和方法。</p>
+                    <div class="article-meta">
+                        <span>📖 阅读时间: 18分钟</span>
+                        <span>🔄 最后更新: 2024.01.15</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 空状态提示（当没有文章时显示） -->
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <i class="fas fa-folder-open"></i>
+                <h3>目录空空如也</h3>
+                <p>还没有添加任何文章，点击下方按钮开始创建吧！</p>
+            </div>
+
+            <!-- 文章管理区域 -->
+            <section class="management-section">
+                <h2 class="management-title">
+                    <i class="fas fa-tools"></i> 文章管理
+                </h2>
+
+                <div class="add-article-form" id="add-form">
+                    <input type="text"
+                           class="form-input"
+                           id="article-title"
+                           placeholder="输入文章标题（例如：PID控制原理）"
+                           required>
+
+                    <input type="text"
+                           class="form-input"
+                           id="article-desc"
+                           placeholder="输入文章描述"
+                           required>
+
+                    <select class="form-input" id="article-icon">
+                        <option value="fa-microchip">💻 芯片图标</option>
+                        <option value="fa-cogs">⚙️ 齿轮图标</option>
+                        <option value="fa-bolt">⚡ 闪电图标</option>
+                        <option value="fa-robot">🤖 机器人图标</option>
+                        <option value="fa-brain">🧠 大脑图标</option>
+                        <option value="fa-book">📚 书籍图标</option>
+                    </select>
+
+                    <button class="add-btn" id="add-article-btn">
+                        <i class="fas fa-plus"></i> 添加新文章
+                    </button>
+                </div>
+
+                <div style="margin-top: 20px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.5);">
+                    <p>💡 提示：添加的文章会保存在本目录中，你可以随时编辑或删除。</p>
+                </div>
+            </section>
+
+            <!-- 导航按钮 -->
+            <div class="nav-buttons">
+                <a href="../../../index.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>返回主知识库</span>
+                </a>
+
+                <a href="#" class="nav-btn" id="export-btn">
+                    <i class="fas fa-download"></i>
+                    <span>导出目录结构</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 文章数据管理
+        let articles = JSON.parse(localStorage.getItem('automation-articles')) || [
+        {
+        id: 1,
+        title: "PLC编程入门指南",
+        description: "从零开始学习PLC梯形图编程，掌握工业自动化控制的核心技能。",
+        icon: "fa-microchip",
+        filename: "plc-basics.html",
+        readTime: "15分钟",
+        lastUpdate: "2024.01.20"
+        },
+        {
+        id: 2,
+        title: "传感器工作原理详解",
+        description: "深入解析各类工业传感器的原理、选型和应用场景。",
+        icon: "fa-bolt",
+        filename: "sensor-principles.html",
+        readTime: "12分钟",
+        lastUpdate: "2024.01.18"
+        },
+        {
+        id: 3,
+        title: "电机控制基础",
+        description: "学习直流电机、步进电机、伺服电机的控制原理和方法。",
+        icon: "fa-cogs",
+        filename: "motor-control.html",
+        readTime: "18分钟",
+        lastUpdate: "2024.01.15"
+        }
+        ];
+
+        // 渲染文章列表
+        function renderArticles() {
+        const container = document.getElementById('articles-container');
+        const emptyState = document.getElementById('empty-state');
+
+        if (articles.length === 0) {
+        container.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+        }
+
+        container.style.display = 'grid';
+        emptyState.style.display = 'none';
+
+        container.innerHTML = articles.map(article => `
+        <a href="${article.filename}" class="article-card" data-id="${article.id}">
+        <div class="article-icon">
+        <i class="fas ${article.icon}"></i>
+        </div>
+        <h3>${article.title}</h3>
+        <p>${article.description}</p>
+        <div class="article-meta">
+        <span>📖 阅读时间: ${article.readTime}</span>
+        <span>🔄 最后更新: ${article.lastUpdate}</span>
+        </div>
+        <div class="article-actions" style="margin-top: 10px;">
+        <button class="delete-btn" onclick="deleteArticle(${article.id}); event.stopPropagation();"
+        style="background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; cursor: pointer;">
+        <i class="fas fa-trash"></i> 删除
+        </button>
+        </div>
+        </a>
+        `).join('');
+
+        // 保存到本地存储
+        localStorage.setItem('automation-articles', JSON.stringify(articles));
+        }
+
+        // 添加新文章
+        document.getElementById('add-article-btn').addEventListener('click', function() {
+        const title = document.getElementById('article-title').value.trim();
+        const desc = document.getElementById('article-desc').value.trim();
+        const icon = document.getElementById('article-icon').value;
+
+        if (!title || !desc) {
+        alert('请输入文章标题和描述');
+        return;
+        }
+
+        // 生成文件名（将中文标题转换为拼音或使用时间戳）
+        const timestamp = new Date().getTime();
+        const filename = `article-${timestamp}.html`;
+
+        // 创建新文章对象
+        const newArticle = {
+        id: articles.length + 1,
+        title: title,
+        description: desc,
+        icon: icon,
+        filename: filename,
+        readTime: "10分钟", // 默认值
+        lastUpdate: new Date().toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+        }).replace(/\//g, '.')
+        };
+
+        articles.push(newArticle);
+        renderArticles();
+
+        // 创建对应的HTML文件
+        createArticleFile(filename, title, desc, icon);
+
+        // 清空表单
+        document.getElementById('article-title').value = '';
+        document.getElementById('article-desc').value = '';
+
+        alert('文章添加成功！');
+        });
+
+        // 创建文章HTML文件
+        function createArticleFile(filename, title, description, icon) {
+        const template = `
+        <!DOCTYPE html>
+        <html lang="zh-CN">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${title} | 自动化基础知识</title>
+        <link rel="stylesheet" href="../../../style.css">
+        <style>
+        .article-page { max-width: 800px; margin: 40px auto; padding: 30px; }
+        h1 { color: #3b82f6; }
+        .back-link { display: inline-block; margin-top: 30px; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; }
+        </style>
+        </head>
+        <body>
+        <div class="article-page">
+        <h1>${title}</h1>
+        <p>${description}</p>
+        <p>这里是文章内容...（你可以编辑这个文件添加详细内容）</p>
+        <a href="index.html" class="back-link">← 返回目录</a>
+        </div>
+        </body>
+        </html>`;
+
+        // 在实际项目中，这里需要将文件保存到服务器
+        // 对于静态网站，我们可以提供下载链接或手动创建
+        console.log(`需要创建文件: ${filename}`);
+        console.log('文件内容:', template);
+
+        // 提示用户手动创建
+        alert(`请手动创建文件: articles/automation/basic-knowledge/${filename}\n\n已复制内容到剪贴板`);
+
+        // 将内容复制到剪贴板
+        navigator.clipboard.writeText(template);
+        }
+
+        // 删除文章
+        function deleteArticle(id) {
+        if (confirm('确定要删除这篇文章吗？')) {
+        articles = articles.filter(article => article.id !== id);
+        renderArticles();
+        }
+        }
+
+        // 导出目录结构
+        document.getElementById('export-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const dataStr = JSON.stringify(articles, null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+
+        const exportFileDefaultName = '自动化知识目录.json';
+
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportFileDefaultName);
+        linkElement.click();
+        });
+
+        // 页面加载时渲染文章
+        document.addEventListener('DOMContentLoaded', renderArticles);
+    </script>
 </body>
 </html>
