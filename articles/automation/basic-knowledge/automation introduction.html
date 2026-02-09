@@ -1,20 +1,338 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>PLC�������ָ��</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- {需要修改} 修改文章标题 -->
+    <title>文章标题 | 自动化基础知识</title>
     <link rel="stylesheet" href="../../../style.css">
     <style>
-        .article-container { max-width: 800px; margin: 40px auto; padding: 30px; background: rgba(30,41,59,0.8); border-radius: 12px; }
-        h1 { color: #3b82f6; }
-        .back-link { display: inline-block; margin-top: 30px; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; }
+        /* 文章页面专用样式 */
+        .article-page {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #3b82f6;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+        
+        .article-content h2 {
+            color: #60a5fa;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.8rem;
+        }
+        
+        .article-content h3 {
+            color: #93c5fd;
+            margin: 30px 0 15px;
+            font-size: 1.5rem;
+        }
+        
+        .article-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .article-content li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+        
+        /* 代码块样式 */
+        .code-block {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* 图片样式 */
+        .article-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 25px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .image-caption {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        /* 引用样式 */
+        .quote-block {
+            border-left: 4px solid #3b82f6;
+            padding: 20px 25px;
+            margin: 30px 0;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+        }
+        
+        /* 导航按钮 */
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(59, 130, 246, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: rgba(59, 130, 246, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .article-page {
+                padding: 30px 15px;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            .article-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="article-container">
-        <h1>PLC�������ָ��</h1>
-        <p>PLC���ɱ���߼����������ǹ�ҵ�Զ������Ƶĺ����豸...</p>
-        <a href="index.html" class="back-link">�� ����Ŀ¼</a>
-    </div>
+    <!-- 背景层 -->
+    <div class="background-layer"></div>
+    <div class="background-image"></div>
+    <div class="background-overlay"></div>
+    
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+        <div class="avatar-container">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                 alt="个人头像" class="avatar">
+        </div>
+        <div class="user-info">
+            <h1 class="name">当前文章</h1>
+            <p class="bio"><!-- {可选修改} 文章副标题 --></p>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="index.html" class="menu-link active">
+                    <i class="fas fa-book"></i>
+                    <span>返回目录</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="../../../index.html" class="menu-link">
+                    <i class="fas fa-home"></i>
+                    <span>返回首页</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+    
+    <!-- 文章内容 -->
+    <main class="main-content">
+        <div class="article-page">
+            <!-- 文章头部 -->
+            <header class="article-header">
+                <!-- {需要修改} 修改文章标题 -->
+                <h1 class="article-title">文章标题</h1>
+                <div class="article-meta">
+                    <!-- {需要修改} 更新日期和时间 -->
+                    <span>📅 发布日期：2024年1月22日</span>
+                    <span>⏱️ 阅读时间：15分钟</span>
+                    <span>📊 难度：初级</span>
+                    <span>🔄 最后更新：2024.01.22</span>
+                </div>
+            </header>
+            
+            <!-- 文章内容 -->
+            <article class="article-content">
+                <!-- 
+                {需要修改} 从这里开始编写文章内容
+                可以使用以下HTML标签：
+                
+                <h2>二级标题</h2>
+                <h3>三级标题</h3>
+                <p>段落内容</p>
+                
+                <ul> 或 <ol> 列表：
+                <li>列表项1</li>
+                <li>列表项2</li>
+                
+                代码块：
+                <div class="code-block">
+                    <div class="code-header">语言类型</div>
+                    <pre>代码内容</pre>
+                </div>
+                
+                图片：
+                <img src="图片路径" alt="描述" class="article-image">
+                <div class="image-caption">图片说明</div>
+                
+                引用：
+                <div class="quote-block">
+                    引用内容
+                </div>
+                -->
+                
+                <h2>第一章：引言</h2>
+                <p>在这里开始编写你的文章内容...</p>
+                
+                <h3>1.1 基础概念</h3>
+                <p>详细解释基础概念...</p>
+                
+                <h2>第二章：核心内容</h2>
+                <p>深入讲解核心内容...</p>
+                
+                <ul>
+                    <li>要点一：详细说明</li>
+                    <li>要点二：详细说明</li>
+                    <li>要点三：详细说明</li>
+                </ul>
+                
+                <h2>第三章：实例分析</h2>
+                
+                <div class="code-block">
+                    <div class="code-header">PLC梯形图示例</div>
+                    <pre>
+// 示例代码
+LD   X0      // 启动按钮
+OR   Y0      // 自锁
+ANI  X1      // 停止按钮
+OUT  Y0      // 输出到电机
+                    </pre>
+                </div>
+                
+                <h2>第四章：总结</h2>
+                <p>文章总结内容...</p>
+                
+                <div class="quote-block">
+                    "自动化的本质是让机器更好地服务人类，而不是取代人类。"
+                </div>
+            </article>
+            
+            <!-- 文章导航 -->
+            <div class="article-navigation">
+                <a href="index.html" class="nav-button">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>返回目录</span>
+                </a>
+                
+                <div>
+                    <!-- {可选修改} 下一篇链接 -->
+                    <a href="#" class="nav-button">
+                        <span>下一篇：下一篇标题</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // 简单的页面交互
+        document.addEventListener('DOMContentLoaded', function() {
+            // 代码块点击复制功能
+            document.querySelectorAll('.code-block').forEach(block => {
+                block.addEventListener('click', function() {
+                    const code = this.querySelector('pre').textContent;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = this.querySelector('.code-header').textContent;
+                        this.querySelector('.code-header').textContent = '✅ 代码已复制！';
+                        setTimeout(() => {
+                            this.querySelector('.code-header').textContent = originalText;
+                        }, 2000);
+                    });
+                });
+            });
+            
+            // 图片点击放大
+            document.querySelectorAll('.article-image').forEach(img => {
+                img.addEventListener('click', function() {
+                    this.style.maxWidth = this.style.maxWidth === '100%' ? '80%' : '100%';
+                });
+            });
+            
+            // 更新最后阅读时间
+            const lastRead = localStorage.getItem('lastRead_' + document.title);
+            if (lastRead) {
+                console.log('上次阅读时间：' + lastRead);
+            }
+            localStorage.setItem('lastRead_' + document.title, new Date().toLocaleString());
+        });
+    </script>
 </body>
 </html>
